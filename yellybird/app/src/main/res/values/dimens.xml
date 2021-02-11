@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="record_size">42sp</dimen>
+    <dimen name="score_size">28sp</dimen>
+    <dimen name="menu_btn">150dp</dimen>
+</resources>
