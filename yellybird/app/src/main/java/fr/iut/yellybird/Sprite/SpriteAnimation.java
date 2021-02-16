@@ -15,11 +15,11 @@ import android.view.SurfaceView;
 public class SpriteAnimation extends SurfaceView implements Runnable {
 
         private Thread gameThread;
+        public float x = 10, y = 10;
         private SurfaceHolder ourHolder;
-        private volatile boolean playing;
+        private boolean playing;
         private Canvas canvas;
-        public Bitmap sprite;
-        private float manXPos = 10, manYPos = 10;
+        private Bitmap sprite;
         private int frameWidth, frameHeight;
         private final int FRAME_COUNT;
         private int currentFrame = 0;
@@ -37,7 +37,7 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
             frameWidth=width;
             frameHeight=Height;
             frameToDraw = new Rect(0, 0, frameWidth, frameHeight);
-            whereToDraw = new RectF(manXPos, manYPos, manXPos + frameWidth, frameHeight);
+            whereToDraw = new RectF(x, y, x + frameWidth, frameHeight);
             sprite = BitmapFactory.decodeResource(getResources(), ressourceId);
             sprite = Bitmap.createScaledBitmap(sprite, frameWidth * FRAME_COUNT, frameHeight, false);
         }
@@ -47,9 +47,7 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
             while (playing) {
                 long startFrameTime = System.currentTimeMillis();
                 draw();
-
                 timeThisFrame = System.currentTimeMillis() - startFrameTime;
-
                 if (timeThisFrame >= 1) {
                     fps = 1000 / timeThisFrame;
                 }
@@ -75,7 +73,7 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
             if (ourHolder.getSurface().isValid()) {
                 canvas = ourHolder.lockCanvas();
                 canvas.drawColor(Color.WHITE);
-                whereToDraw.set((int) manXPos, (int) manYPos, (int) manXPos + frameWidth, (int) manYPos + frameHeight);
+                whereToDraw.set((int) x, (int) y, (int) x + frameWidth, (int) y + frameHeight);
                 manageCurrentFrame();
                 canvas.drawBitmap(sprite, frameToDraw, whereToDraw, null);
                 ourHolder.unlockCanvasAndPost(canvas);
