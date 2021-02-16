@@ -18,26 +18,28 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
         private SurfaceHolder ourHolder;
         private volatile boolean playing;
         private Canvas canvas;
-        private Bitmap sprite;
+        public Bitmap sprite;
         private float manXPos = 10, manYPos = 10;
-        private int frameWidth = 26, frameHeight = 36;
-        private int frameCount = 3;
+        private int frameWidth, frameHeight;
+        private final int FRAME_COUNT;
         private int currentFrame = 0;
         private long fps;
         private long timeThisFrame;
         private long lastFrameChangeTime = 0;
         private int frameLengthInMillisecond = 150;
+        private Rect frameToDraw;
+        private RectF whereToDraw;
 
-        private Rect frameToDraw = new Rect(0, 0, frameWidth, frameHeight);
-
-        private RectF whereToDraw = new RectF(manXPos, manYPos, manXPos + frameWidth, frameHeight);
-
-        public SpriteAnimation(Context context,int ressourceId, int nbFrame) {
+        public SpriteAnimation(Context context,int ressourceId, int nbFrame,int width,int Height) {
             super(context);
             ourHolder = getHolder();
-            frameCount = nbFrame;
+            FRAME_COUNT = nbFrame;
+            frameWidth=width;
+            frameHeight=Height;
+            frameToDraw = new Rect(0, 0, frameWidth, frameHeight);
+            whereToDraw = new RectF(manXPos, manYPos, manXPos + frameWidth, frameHeight);
             sprite = BitmapFactory.decodeResource(getResources(), ressourceId);
-            sprite = Bitmap.createScaledBitmap(sprite, frameWidth * frameCount, frameHeight, false);
+            sprite = Bitmap.createScaledBitmap(sprite, frameWidth * FRAME_COUNT, frameHeight, false);
         }
 
         @Override
@@ -60,7 +62,7 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
                     lastFrameChangeTime = time;
                     currentFrame++;
 
-                    if (currentFrame >= frameCount) {
+                    if (currentFrame >= FRAME_COUNT) {
                         currentFrame = 0;
                     }
                 }
@@ -82,7 +84,6 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
 
         public void pause() {
             playing = false;
-
             try {
                 gameThread.join();
             } catch(InterruptedException e) {
