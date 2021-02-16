@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import fr.iut.yellybird.R;
+import fr.iut.yellybird.components.Bird;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -13,5 +14,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Bird bird = new Bird();
+        
     }
 }
