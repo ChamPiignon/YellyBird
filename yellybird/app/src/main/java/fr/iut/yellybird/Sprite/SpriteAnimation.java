@@ -1,6 +1,6 @@
 package fr.iut.yellybird.Sprite;
 
-import android.content.Context;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,51 +8,43 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+
+import fr.iut.yellybird.Game.Game;
 
 
-
-public class SpriteAnimation extends SurfaceView implements Runnable {
-
-        private Thread gameThread;
-        public float x = 10, y = 10;
+public class SpriteAnimation {
+        private final int FRAME_COUNT;
+        public float x = 0, y = 0;
         private SurfaceHolder ourHolder;
-        private boolean playing;
         private Canvas canvas;
         private Bitmap sprite;
-        private int frameWidth, frameHeight;
-        private final int FRAME_COUNT;
+        private int frameWidth;
+
+
+    private int frameHeight;
         private int currentFrame = 0;
-        private long fps;
-        private long timeThisFrame;
+        private Game context;
         private long lastFrameChangeTime = 0;
         private int frameLengthInMillisecond = 150;
         private Rect frameToDraw;
         private RectF whereToDraw;
 
-        public SpriteAnimation(Context context,int ressourceId, int nbFrame,int width,int Height) {
-            super(context);
-            ourHolder = getHolder();
+        public SpriteAnimation(Game context, int ressourceId, int nbFrame, int width, int Height, int scale) {
+            this.context = context;
+            ourHolder = context.getHolder();
             FRAME_COUNT = nbFrame;
-            frameWidth=width;
-            frameHeight=Height;
+            frameWidth=width*scale;
+            frameHeight=Height*scale;
             frameToDraw = new Rect(0, 0, frameWidth, frameHeight);
             whereToDraw = new RectF(x, y, x + frameWidth, frameHeight);
-            sprite = BitmapFactory.decodeResource(getResources(), ressourceId);
+            sprite = BitmapFactory.decodeResource(context.getResources(), ressourceId);
             sprite = Bitmap.createScaledBitmap(sprite, frameWidth * FRAME_COUNT, frameHeight, false);
         }
 
-        @Override
-        public void run() {
-            while (playing) {
-                long startFrameTime = System.currentTimeMillis();
-                draw();
-                timeThisFrame = System.currentTimeMillis() - startFrameTime;
-                if (timeThisFrame >= 1) {
-                    fps = 1000 / timeThisFrame;
-                }
-            }
+        public SpriteAnimation(Game context,int ressourceId, int nbFrame,int width,int Height) {
+            this(context,ressourceId,nbFrame,width,Height,1);
         }
+
 
         public void manageCurrentFrame() {
             long time = System.currentTimeMillis();
@@ -69,8 +61,8 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
             frameToDraw.right = frameToDraw.left + frameWidth;
         }
 
-        public void draw() {
-            if (ourHolder.getSurface().isValid()) {
+    public void draw() {
+        if (ourHolder.getSurface().isValid()) {
                 canvas = ourHolder.lockCanvas();
                 canvas.drawColor(Color.WHITE);
                 whereToDraw.set((int) x, (int) y, (int) x + frameWidth, (int) y + frameHeight);
@@ -79,19 +71,19 @@ public class SpriteAnimation extends SurfaceView implements Runnable {
                 ourHolder.unlockCanvasAndPost(canvas);
             }
         }
+    public boolean isCollition(float x2, float y2) {
+        return x2 > x && x2 < x + frameWidth && y2 > y && y2 < y + frameHeight;
+    }
 
-        public void pause() {
-            playing = false;
-            try {
-                gameThread.join();
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public int getFrameWidth() {
+        return frameWidth;
+    }
 
-        public void resume() {
-            playing = true;
-            gameThread = new Thread(this);
-            gameThread.start();
-        }
+    public int getFrameHeight() {
+        return frameHeight;
+    }
+
+    public Game getContext() {
+        return context;
+    }
 }
