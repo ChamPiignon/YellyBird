@@ -25,7 +25,7 @@ public class BirdSpriteAnimation extends SpriteAnimation{
     }
 
     private void update() {
-        if (y >= getContext().getHeight() - getFrameHeight() - forceGravity || y + forceGravity <= 0) {
+        if (y >= getContext().getHeight() - getFrameHeight() - forceGravity) {
             forceGravity = 0;
             isOnTheFloor=true;
         }

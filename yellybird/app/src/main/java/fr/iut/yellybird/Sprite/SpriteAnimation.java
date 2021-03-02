@@ -11,7 +11,7 @@ import android.view.SurfaceHolder;
 import fr.iut.yellybird.Game.GameView;
 
 
-public class SpriteAnimation {
+public class SpriteAnimation implements  Sprite{
         private final int FRAME_COUNT;
         public float x = 0, y = 0;
         private SurfaceHolder ourHolder;
@@ -58,7 +58,7 @@ public class SpriteAnimation {
             frameToDraw.left = currentFrame * frameWidth;
             frameToDraw.right = frameToDraw.left + frameWidth;
         }
-
+    @Override
     public void draw(Canvas canvas) {
         if (ourHolder.getSurface().isValid()) {
                 whereToDraw.set((int) x, (int) y, (int) x + frameWidth, (int) y + frameHeight);
@@ -67,7 +67,7 @@ public class SpriteAnimation {
         }
      }
 
-    public boolean isCollition(float x2, float y2) {
+    public boolean isCollide(float x2, float y2) {
         return x2 > x && x2 < x + frameWidth && y2 > y && y2 < y + frameHeight;
     }
 

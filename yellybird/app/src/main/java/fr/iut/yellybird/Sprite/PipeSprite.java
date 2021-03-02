@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 import fr.iut.yellybird.Game.GameView;
 import fr.iut.yellybird.components.Pipes;
 
-public class PipeSprite {
+public class PipeSprite implements Sprite {
     private Pipes pipes;
     private Bitmap bottomPipe;
     private Bitmap topPipe;
@@ -27,6 +27,7 @@ public class PipeSprite {
         whereToDrawT=new RectF(pipes.getX(), pipes.getyUp(), pipes.getX()+topPipe.getWidth(), topPipe.getHeight());
     }
 
+    @Override
     public void draw(Canvas canvas)
     {
         if (ourHolder.getSurface().isValid()) {
