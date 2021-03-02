@@ -2,12 +2,10 @@ package fr.iut.yellybird.Game;
 
 public class GameThread  extends Thread {
     static final long FPS = 60;
-    private Game view;
+    private GameView view;
     private boolean running = false;
 
-    public GameThread(Game view) {
-        this.view = view;
-    }
+    public GameThread(GameView view) { this.view = view; }
 
     public void setRunning(boolean run) {
         running = run;

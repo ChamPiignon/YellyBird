@@ -4,32 +4,30 @@ package fr.iut.yellybird.Sprite;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
-import fr.iut.yellybird.Game.Game;
+import fr.iut.yellybird.Game.GameView;
 
 
 public class SpriteAnimation {
         private final int FRAME_COUNT;
         public float x = 0, y = 0;
         private SurfaceHolder ourHolder;
-        private Canvas canvas;
         private Bitmap sprite;
         private int frameWidth;
 
 
     private int frameHeight;
         private int currentFrame = 0;
-        private Game context;
+        private GameView context;
         private long lastFrameChangeTime = 0;
         private int frameLengthInMillisecond = 150;
         private Rect frameToDraw;
         private RectF whereToDraw;
 
-        public SpriteAnimation(Game context, int ressourceId, int nbFrame, int width, int Height, int scale) {
+        public SpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height, int scale) {
             this.context = context;
             ourHolder = context.getHolder();
             FRAME_COUNT = nbFrame;
@@ -41,7 +39,7 @@ public class SpriteAnimation {
             sprite = Bitmap.createScaledBitmap(sprite, frameWidth * FRAME_COUNT, frameHeight, false);
         }
 
-        public SpriteAnimation(Game context,int ressourceId, int nbFrame,int width,int Height) {
+        public SpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height) {
             this(context,ressourceId,nbFrame,width,Height,1);
         }
 
@@ -61,16 +59,14 @@ public class SpriteAnimation {
             frameToDraw.right = frameToDraw.left + frameWidth;
         }
 
-    public void draw() {
+    public void draw(Canvas canvas) {
         if (ourHolder.getSurface().isValid()) {
-                canvas = ourHolder.lockCanvas();
-                canvas.drawColor(Color.WHITE);
                 whereToDraw.set((int) x, (int) y, (int) x + frameWidth, (int) y + frameHeight);
                 manageCurrentFrame();
                 canvas.drawBitmap(sprite, frameToDraw, whereToDraw, null);
-                ourHolder.unlockCanvasAndPost(canvas);
-            }
         }
+     }
+
     public boolean isCollition(float x2, float y2) {
         return x2 > x && x2 < x + frameWidth && y2 > y && y2 < y + frameHeight;
     }
@@ -83,7 +79,7 @@ public class SpriteAnimation {
         return frameHeight;
     }
 
-    public Game getContext() {
+    public GameView getContext() {
         return context;
     }
 }

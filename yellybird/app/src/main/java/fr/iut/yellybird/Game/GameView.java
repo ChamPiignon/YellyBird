@@ -1,6 +1,8 @@
 package fr.iut.yellybird.Game;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.view.MotionEvent;
@@ -11,9 +13,10 @@ import android.view.SurfaceView;
 
 import fr.iut.yellybird.R;
 import fr.iut.yellybird.Sprite.BirdSpriteAnimation;
+import fr.iut.yellybird.Sprite.PipeSprite;
 import fr.iut.yellybird.Sprite.SpriteAnimation;
 
-public class Game extends SurfaceView {
+public class GameView extends SurfaceView {
     private SurfaceHolder holder;
     private GameThread gameThread;
     private BirdSpriteAnimation bird;
@@ -21,8 +24,10 @@ public class Game extends SurfaceView {
     private int score;
     private long lastClick=0;
     private int birdSprite = R.drawable.yellow;
+    private PipeSprite pipes;
+    private Canvas canvas;
 
-    public Game(Context context) {
+    public GameView(Context context) {
         super(context);
         gameThread = new GameThread(this);
         holder = getHolder();
@@ -35,7 +40,7 @@ public class Game extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                initSprites(birdSprite);
+                initSprites();
                 gameThread.setRunning(true);
                 gameThread.start();
             }
@@ -47,12 +52,17 @@ public class Game extends SurfaceView {
         });
     }
 
-    private void initSprites(int sprite) {
-        bird = new BirdSpriteAnimation(this, sprite, 3, 36, 26,4,10);
+    private void initSprites() {
+        bird = new BirdSpriteAnimation(this, birdSprite, 3, 36, 26,4,10);
+        pipes = new PipeSprite(this,R.drawable.bottom_pipe,R.drawable.top_pipe);
     }
 
     public void draw() {
-            bird.draw();
+        canvas = this.getHolder().lockCanvas();
+        canvas.drawColor(Color.WHITE);
+        pipes.draw(canvas);
+        bird.draw(canvas);
+        this.getHolder().unlockCanvasAndPost(canvas);
     }
 
     public boolean isDead(int xPipe,int yPipe)
@@ -69,7 +79,7 @@ public class Game extends SurfaceView {
         if (System.currentTimeMillis() - lastClick > 300) {
             lastClick = System.currentTimeMillis();
             synchronized (getHolder()) {
-//                bird.fly();
+                bird.fly();
             }
 
         }

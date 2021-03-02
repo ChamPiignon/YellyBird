@@ -5,19 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import fr.iut.yellybird.Game.Game;
-import fr.iut.yellybird.R;
-import fr.iut.yellybird.Sprite.SpriteAnimation;
+import fr.iut.yellybird.Game.GameView;
 
 public class GameActivity extends AppCompatActivity {
 
-    private Game game;
+    private GameView gameView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        game = new Game(this);
-        setContentView(game);
+        gameView = new GameView(this);
+        setContentView(gameView);
     }
 
     @Override
