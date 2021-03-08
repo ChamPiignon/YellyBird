@@ -7,10 +7,13 @@ import fr.iut.yellybird.Game.GameView;
 public class BirdSpriteAnimation extends SpriteAnimation{
     private int forceGravity;
     public boolean isOnTheFloor;
+    private int floorHeigh;
+
     public BirdSpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height, int scale, int gravity) {
         super(context, ressourceId, nbFrame, width, Height, scale);
         this.forceGravity= gravity;
         this.isOnTheFloor=false;
+        floorHeigh=getContext().getHeight()-getFrameHeight();
     }
 
     public BirdSpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height, int forceGravity) {
@@ -25,7 +28,7 @@ public class BirdSpriteAnimation extends SpriteAnimation{
     }
 
     private void update() {
-        if (y >= getContext().getHeight() - getFrameHeight() - forceGravity) {
+        if (y >= getContext().getHeight()- floorHeigh - getFrameHeight() - forceGravity) {
             forceGravity = 0;
             isOnTheFloor=true;
         }
@@ -45,4 +48,7 @@ public class BirdSpriteAnimation extends SpriteAnimation{
         }
     }
 
+    public void setFloorHeight(int height) {
+        floorHeigh=height;
+    }
 }

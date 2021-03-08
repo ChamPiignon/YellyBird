@@ -20,11 +20,11 @@ public class PipeSprite implements Sprite {
     public PipeSprite(GameView context, int ressourceIdBottomPipe, int ressourceIdTopPipe)
     {
         ourHolder=context.getHolder();
-        bottomPipe = BitmapFactory.decodeResource(context.getResources(),ressourceIdBottomPipe);
         topPipe = BitmapFactory.decodeResource(context.getResources(),ressourceIdTopPipe);
+        bottomPipe = BitmapFactory.decodeResource(context.getResources(),ressourceIdBottomPipe);
         pipes =new Pipes(context.getHeight(),context.getWidth());
-        whereToDrawB=new RectF(pipes.getX(), pipes.getyUp(), pipes.getX()+topPipe.getWidth(), topPipe.getHeight());
         whereToDrawT=new RectF(pipes.getX(), pipes.getyUp(), pipes.getX()+topPipe.getWidth(), topPipe.getHeight());
+        whereToDrawB=new RectF(pipes.getX(), pipes.getyDown(), pipes.getX()+topPipe.getWidth(), topPipe.getHeight());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class PipeSprite implements Sprite {
         if (ourHolder.getSurface().isValid()) {
             whereToDrawT.set(
                     pipes.getX(),
-                    pipes.getyUp(),
+                    0,
                     pipes.getX()+ topPipe.getWidth(),
                     pipes.getyUp() + topPipe.getHeight());
             canvas.drawBitmap(topPipe, null, whereToDrawT, null);
@@ -43,7 +43,7 @@ public class PipeSprite implements Sprite {
                     pipes.getX(),
                     pipes.getyDown(), // 1000
                     pipes.getX()+bottomPipe.getWidth(),
-                    pipes.getyDown() + bottomPipe.getHeight() // 1000 + 400 = 1400
+                    canvas.getHeight() // 1000 + 400 = 1400
             ); // position Y du bas du tuyeau, si bottomPipe.getHeight() = 400;
             canvas.drawBitmap(bottomPipe, null, whereToDrawB,null);
         }

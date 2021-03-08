@@ -41,4 +41,8 @@ public class FloorSprite implements Sprite {
     {
 
     }
+
+    public Bitmap getFloor() {
+        return floor;
+    }
 }

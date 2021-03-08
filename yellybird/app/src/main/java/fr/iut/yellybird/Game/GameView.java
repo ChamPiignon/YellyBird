@@ -46,6 +46,7 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 initSprites();
+                setCollision();
                 gameThread.setRunning(true);
                 gameThread.start();
             }
@@ -62,6 +63,11 @@ public class GameView extends SurfaceView {
         pipes = new PipeSprite(this,R.drawable.bottom_pipe,R.drawable.top_pipe);
         floor = new FloorSprite(this,R.drawable.base);
         bg = new BackgroundSprite(this,R.drawable.background);
+    }
+
+    private void setCollision()
+    {
+        bird.setFloorHeight(floor.getFloor().getHeight());
     }
 
     public void draw() {

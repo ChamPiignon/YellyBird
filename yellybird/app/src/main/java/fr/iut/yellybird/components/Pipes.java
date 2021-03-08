@@ -12,7 +12,7 @@ public class Pipes {
 
     public Pipes(int screenHeight, int screenWidth){
         yDown = (int) Math.floor(Math.random() * (screenHeight/2) + .3 * screenHeight);
-        yUp = (int) (yDown - screenHeight*0.9);
+        yUp = (int) (yDown - screenHeight);
         SPACING_X = screenWidth*0.15;
         x=screenWidth;
         X_INIT=screenHeight;
@@ -29,7 +29,7 @@ public class Pipes {
     public void init(){
         x = X_INIT;
         yDown = (int) Math.floor(Math.random() * (height/2) + .3 * height);
-        yUp = (int) (yDown - height*0.9);
+        yUp = (int) (yDown - height);
     }
     public int getyUp() {
         return yUp;
