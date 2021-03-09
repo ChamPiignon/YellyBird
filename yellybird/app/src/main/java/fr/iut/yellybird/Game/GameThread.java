@@ -20,6 +20,7 @@ public class GameThread  extends Thread {
         while (running) {
             startTime = System.currentTimeMillis();
                 synchronized (view.getHolder()) {
+                    view.addPoint();
                     view.draw();
                     if(!view.isGameOver()){
                         view.move();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.MediaRecorder;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -26,7 +27,7 @@ public class GameView extends SurfaceView {
     private FloorSprite floor;
     private BackgroundSprite bg;
     private MediaRecorder microphone;
-    private int score;
+    private int score=0;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
     public boolean gameOver = false;
@@ -93,6 +94,16 @@ public class GameView extends SurfaceView {
             return gameOver;
         }
         return false;
+    }
+
+
+    public void addPoint()
+    {
+        if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x)
+
+        score=score+1;
+        Log.i("score:"," "+score);//supprimer
+
     }
 
 
