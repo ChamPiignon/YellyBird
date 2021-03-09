@@ -82,4 +82,8 @@ public class SpriteAnimation implements  Sprite{
     public GameView getContext() {
         return context;
     }
+
+    public RectF getWhereToDraw() {
+        return whereToDraw;
+    }
 }

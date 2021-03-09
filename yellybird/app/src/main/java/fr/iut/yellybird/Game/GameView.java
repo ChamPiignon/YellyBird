@@ -29,6 +29,7 @@ public class GameView extends SurfaceView {
     private int score;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
+    public boolean gameOver = false;
 
     private Canvas canvas;
 
@@ -74,20 +75,22 @@ public class GameView extends SurfaceView {
         canvas = this.getHolder().lockCanvas();
         canvas.drawColor(Color.WHITE);
         bg.draw(canvas);
-        if(!isGameOver())
-        {
-            pipes.draw(canvas);
-            bird.draw(canvas);
-        }
+        pipes.draw(canvas);
+        bird.draw(canvas);
         floor.draw(canvas);
         this.getHolder().unlockCanvasAndPost(canvas);
     }
 
+    public void move() {
+        pipes.moveX();
+    }
+
     public boolean isGameOver()
     {
-        if(bird.isCollide(pipes.getPipes().getX(),pipes.getPipes().getyUp()) || bird.isOnTheFloor)
+        if(bird.isOnTheFloor||gameOver||pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())|| pipes.getWhereToDrawT().intersect(bird.getWhereToDraw()))
         {
-            return true;
+            gameOver=true;
+            return gameOver;
         }
         return false;
     }
@@ -97,16 +100,20 @@ public class GameView extends SurfaceView {
     //A supprimer
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (System.currentTimeMillis() - lastClick > 300) {
+        if (System.currentTimeMillis() - lastClick > 200) {
             lastClick = System.currentTimeMillis();
             synchronized (getHolder()) {
-                bird.fly();
+                if(!gameOver)
+                {
+                    bird.fly();
+                }
+
             }
 
         }
-
-        return true;
-
+     return true;
     }
+
+
 }
 

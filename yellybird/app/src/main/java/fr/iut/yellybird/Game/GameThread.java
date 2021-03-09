@@ -5,6 +5,7 @@ public class GameThread  extends Thread {
     private GameView view;
     private boolean running = false;
 
+
     public GameThread(GameView view) { this.view = view; }
 
     public void setRunning(boolean run) {
@@ -20,6 +21,9 @@ public class GameThread  extends Thread {
             startTime = System.currentTimeMillis();
                 synchronized (view.getHolder()) {
                     view.draw();
+                    if(!view.isGameOver()){
+                        view.move();
+                    }
                 }
             }
             sleepTime = ticksPS - (System.currentTimeMillis() - startTime);

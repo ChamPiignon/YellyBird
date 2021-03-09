@@ -2,13 +2,13 @@ package fr.iut.yellybird.components;
 
 public class Pipes {
 
-    private int width;
-    private int height;
+    public int width;
+    public int height;
     private int yUp,yDown;
     private int x;
-    private final double X_REDUCER=.015;
-    private final double SPACING_X;
-    private final int X_INIT;
+    public final double X_REDUCER=.015;
+    public final double SPACING_X;
+    public final int X_INIT;
 
     public Pipes(int screenHeight, int screenWidth){
         yDown = (int) Math.floor(Math.random() * (screenHeight/2) + .3 * screenHeight);
@@ -20,12 +20,6 @@ public class Pipes {
         width = screenWidth;
     }
 
-    public void moveX(){
-        x -= X_REDUCER*width;
-        if(x<=-SPACING_X){
-            init();
-        }
-    }
     public void init(){
         x = X_INIT;
         yDown = (int) Math.floor(Math.random() * (height/2) + .3 * height);
@@ -40,5 +34,7 @@ public class Pipes {
     public int getX() {
         return x;
     }
-
+    public void setX(int x) {
+        this.x = x;
+    }
 }

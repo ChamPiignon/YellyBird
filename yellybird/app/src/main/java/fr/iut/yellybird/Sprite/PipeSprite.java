@@ -47,13 +47,20 @@ public class PipeSprite implements Sprite {
             ); // position Y du bas du tuyeau, si bottomPipe.getHeight() = 400;
             canvas.drawBitmap(bottomPipe, null, whereToDrawB,null);
         }
-        pipes.moveX();
     }
-
+    public void moveX(){
+        pipes.setX((int) (pipes.getX()-(pipes.X_REDUCER*pipes.width)));
+        if(pipes.getX()<=-pipes.SPACING_X){
+            pipes.init();
+        }
+    }
     public Pipes getPipes() {
         return pipes;
     }
-
-
-
+    public RectF getWhereToDrawB() {
+        return whereToDrawB;
+    }
+    public RectF getWhereToDrawT() {
+        return whereToDrawT;
+    }
 }
