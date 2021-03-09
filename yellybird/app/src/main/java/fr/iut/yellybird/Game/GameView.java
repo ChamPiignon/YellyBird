@@ -3,13 +3,18 @@ package fr.iut.yellybird.Game;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.media.MediaRecorder;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 
 import android.view.SurfaceView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Random;
 
@@ -79,6 +84,7 @@ public class GameView extends SurfaceView {
         pipes.draw(canvas);
         bird.draw(canvas);
         floor.draw(canvas);
+        this.score();
         this.getHolder().unlockCanvasAndPost(canvas);
     }
 
@@ -100,10 +106,22 @@ public class GameView extends SurfaceView {
     public void addPoint()
     {
         if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x)
+            score=score+1;
+    }
 
-        score=score+1;
-        Log.i("score:"," "+score);//supprimer
-
+    private void score()
+    {
+        int width = this.getWidth()/2;
+        int height = this.getHeight()/11;
+        TextPaint paint = new TextPaint();
+        paint.setTypeface(ResourcesCompat.getFont(getContext(),R.font.yelly_font));
+        paint.setColor(Color.BLACK);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(200f);
+        canvas.drawText(" "+score,width,height,paint);
+        paint.setTypeface(ResourcesCompat.getFont(getContext(),R.font.yelly_fill_font));
+        paint.setColor(Color.WHITE);
+        canvas.drawText(" "+score,width,height,paint);
     }
 
 
