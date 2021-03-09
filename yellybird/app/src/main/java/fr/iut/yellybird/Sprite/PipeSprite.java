@@ -50,5 +50,10 @@ public class PipeSprite implements Sprite {
         pipes.moveX();
     }
 
+    public Pipes getPipes() {
+        return pipes;
+    }
+
+
 
 }

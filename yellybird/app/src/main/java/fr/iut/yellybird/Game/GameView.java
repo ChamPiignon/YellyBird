@@ -74,21 +74,27 @@ public class GameView extends SurfaceView {
         canvas = this.getHolder().lockCanvas();
         canvas.drawColor(Color.WHITE);
         bg.draw(canvas);
-        pipes.draw(canvas);
-        bird.draw(canvas);
+        if(!isGameOver())
+        {
+            pipes.draw(canvas);
+            bird.draw(canvas);
+        }
         floor.draw(canvas);
         this.getHolder().unlockCanvasAndPost(canvas);
     }
 
-    public boolean isDead(int xPipe,int yPipe)
+    public boolean isGameOver()
     {
-        if(bird.isCollide(xPipe,yPipe) || bird.isOnTheFloor)
+        if(bird.isCollide(pipes.getPipes().getX(),pipes.getPipes().getyUp()) || bird.isOnTheFloor)
         {
             return true;
         }
         return false;
     }
 
+
+
+    //A supprimer
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (System.currentTimeMillis() - lastClick > 300) {
