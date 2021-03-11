@@ -4,14 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.media.MediaRecorder;
 import android.text.TextPaint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
-
 import android.view.SurfaceView;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -31,7 +27,7 @@ public class GameView extends SurfaceView {
     private PipeSprite pipes;
     private FloorSprite floor;
     private BackgroundSprite bg;
-    private MediaRecorder microphone;
+    private SoundMeter microphone;
     private int score=0;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
