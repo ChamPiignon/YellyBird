@@ -45,7 +45,7 @@ public class SoundMeter {
             microphone.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             microphone.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             microphone.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            microphone.setOutputFile(audioFile.getAbsolutePath());
+            //microphone.setOutputFile(audioFile.getAbsolutePath());
 
             microphone.prepare();
             microphone.start();

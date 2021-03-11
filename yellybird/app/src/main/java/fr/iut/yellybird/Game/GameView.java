@@ -12,6 +12,7 @@ import android.view.SurfaceView;
 
 import androidx.core.content.res.ResourcesCompat;
 
+import java.io.File;
 import java.util.Random;
 
 import fr.iut.yellybird.R;
@@ -37,6 +38,7 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
+        microphone  = new SoundMeter();
         gameThread = new GameThread(this);
         holder = getHolder();
         holder.addCallback(new Callback() {
@@ -50,6 +52,8 @@ public class GameView extends SurfaceView {
             public void surfaceCreated(SurfaceHolder holder) {
                 initSprites();
                 setCollision();
+                microphone.startRecorder();
+                System.out.println(microphone.getMaxAmplitude());
                 gameThread.setRunning(true);
                 gameThread.start();
             }
