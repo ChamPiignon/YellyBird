@@ -28,7 +28,9 @@ public class GameView extends SurfaceView {
     private PipeSprite pipes;
     private FloorSprite floor;
     private BackgroundSprite bg;
-    private SoundMeter microphone;
+
+    private VolumeThread volumeThread;
+
     private int score=0;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
@@ -38,7 +40,7 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
-        microphone  = new SoundMeter();
+//        volumeThread = new VolumeThread(this);
         gameThread = new GameThread(this);
         holder = getHolder();
         holder.addCallback(new Callback() {
@@ -52,8 +54,8 @@ public class GameView extends SurfaceView {
             public void surfaceCreated(SurfaceHolder holder) {
                 initSprites();
                 setCollision();
-                microphone.startRecorder();
-                System.out.println(microphone.getMaxAmplitude());
+//                volumeThread.setRunning(true);
+//                volumeThread.start();
                 gameThread.setRunning(true);
                 gameThread.start();
             }
@@ -125,6 +127,9 @@ public class GameView extends SurfaceView {
     }
 
 
+    public BirdSpriteAnimation getBird() {
+        return bird;
+    }
 
     //A supprimer
     @Override
