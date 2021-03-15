@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Game;
+package fr.iut.yellybird.game;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,14 +12,14 @@ import android.view.SurfaceView;
 
 import androidx.core.content.res.ResourcesCompat;
 
-import java.io.File;
 import java.util.Random;
 
 import fr.iut.yellybird.R;
-import fr.iut.yellybird.Sprite.BackgroundSprite;
-import fr.iut.yellybird.Sprite.BirdSpriteAnimation;
-import fr.iut.yellybird.Sprite.FloorSprite;
-import fr.iut.yellybird.Sprite.PipeSprite;
+import fr.iut.yellybird.models.SoundMeter;
+import fr.iut.yellybird.sprite.BackgroundSprite;
+import fr.iut.yellybird.sprite.BirdSpriteAnimation;
+import fr.iut.yellybird.sprite.FloorSprite;
+import fr.iut.yellybird.sprite.PipeSprite;
 
 public class GameView extends SurfaceView {
     private SurfaceHolder holder;

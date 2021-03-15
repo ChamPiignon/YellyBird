@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Sprite;
+package fr.iut.yellybird.sprite;
 
 
 import android.graphics.Bitmap;
@@ -8,7 +8,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
-import fr.iut.yellybird.Game.GameView;
+import fr.iut.yellybird.game.GameView;
 
 
 public class SpriteAnimation implements  Sprite{

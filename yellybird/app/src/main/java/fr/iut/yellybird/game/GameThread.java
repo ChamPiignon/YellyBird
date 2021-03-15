@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Game;
+package fr.iut.yellybird.game;
 
 import android.util.Log;
 

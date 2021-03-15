@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Sprite;
+package fr.iut.yellybird.sprite;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,8 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
-import fr.iut.yellybird.Game.GameView;
-import fr.iut.yellybird.components.Pipes;
+import fr.iut.yellybird.game.GameView;
 
 public class FloorSprite implements Sprite {
     private Bitmap floor;
