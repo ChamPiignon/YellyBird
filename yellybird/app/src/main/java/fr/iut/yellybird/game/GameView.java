@@ -90,7 +90,7 @@ public class GameView extends SurfaceView {
         pipes.draw(canvas);
         bird.draw(canvas);
         floor.draw(canvas);
-        this.score();
+        this.drawScore();
         this.getHolder().unlockCanvasAndPost(canvas);
     }
 
@@ -115,7 +115,7 @@ public class GameView extends SurfaceView {
             score.addPoint();
     }
 
-    private void score()
+    private void drawScore()
     {
         int width = this.getWidth()/2;
         int height = this.getHeight()/11;
@@ -124,10 +124,10 @@ public class GameView extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(200f);
-        canvas.drawText(" "+score,width,height,paint);
+        canvas.drawText(" "+score.getScore(),width,height,paint);
         paint.setTypeface(ResourcesCompat.getFont(getContext(),R.font.yelly_fill_font));
         paint.setColor(Color.WHITE);
-        canvas.drawText(" "+score,width,height,paint);
+        canvas.drawText(" "+score.getScore(),width,height,paint);
     }
 
 
