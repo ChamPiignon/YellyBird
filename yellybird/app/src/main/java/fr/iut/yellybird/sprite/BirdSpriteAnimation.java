@@ -42,8 +42,7 @@ public class BirdSpriteAnimation extends SpriteAnimation{
             y = y - forceGravity*30;
             if(y>=getContext().getHeight())
             {
-                int val=getContext().getHeight();
-                y=val;
+                y+=1;
             }
         }
     }
