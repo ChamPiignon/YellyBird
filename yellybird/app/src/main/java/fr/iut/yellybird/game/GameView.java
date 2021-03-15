@@ -31,9 +31,7 @@ public class GameView extends SurfaceView {
     private PipeSprite pipes;
     private FloorSprite floor;
     private BackgroundSprite bg;
-    private VolumeThread volumeThread;
     private Score score;
-    private ControlScore controlScore;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
     public boolean gameOver = false;
@@ -43,14 +41,13 @@ public class GameView extends SurfaceView {
     public GameView(Context context) {
         super(context);
         this.context = context;
-//        volumeThread = new VolumeThread(this);
         gameThread = new GameThread(this);
         holder = getHolder();
         holder.addCallback(new Callback() {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-
+                ControlScore.save(score,context);
             }
 
             @Override
@@ -58,8 +55,7 @@ public class GameView extends SurfaceView {
                 initSprites();
                 setCollision();
                 score = ControlScore.load(context);
-//                volumeThread.setRunning(true);
-//                volumeThread.start();
+                ControlScore.save(score,context);
                 gameThread.setRunning(true);
                 gameThread.start();
             }
