@@ -27,6 +27,7 @@ public class GameView extends SurfaceView {
     private  Context context;
     private SurfaceHolder holder;
     private GameThread gameThread;
+    private VolumeThread volumeThread;
     private BirdSpriteAnimation bird;
     private PipeSprite pipes;
     private FloorSprite floor;
@@ -42,6 +43,7 @@ public class GameView extends SurfaceView {
         super(context);
         this.context = context;
         gameThread = new GameThread(this);
+        volumeThread = new VolumeThread(this);
         holder = getHolder();
         holder.addCallback(new Callback() {
 
@@ -58,6 +60,8 @@ public class GameView extends SurfaceView {
                 ControlScore.save(score,context);
                 gameThread.setRunning(true);
                 gameThread.start();
+                volumeThread.setRunning(true);
+                volumeThread.start();
             }
 
             @Override

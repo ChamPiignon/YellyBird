@@ -2,7 +2,7 @@ package fr.iut.yellybird.game;
 import fr.iut.yellybird.models.SoundMeter;
 
 public class GameThread extends Thread {
-    static final long FPS = 120;
+    static final long FPS = 60;
     private GameView view;
     private SoundMeter micro;
     private boolean running = false;
@@ -26,19 +26,20 @@ public class GameThread extends Thread {
         long lastJump = 0;
         while (running) {
             startTime = System.currentTimeMillis();
+
             synchronized (view.getHolder()) {
-                view.addPoint();
                 view.draw();
+                view.addPoint();
                 if (!view.isGameOver()) {
                     view.move();
                 }
             }
             // Log.v("MicInfoService", "amplitude: " + micro.getAmplitude()); // makes laggy
-            if (micro.getAmplitude() > 3000 && System.currentTimeMillis() - lastJump > 1000) {
+            /*if ( System.currentTimeMillis() - lastJump > 1000 && micro.getAmplitude() > 3000 ) {
                 System.out.println("ENOUGH");
                 lastJump = System.currentTimeMillis();
                 view.getBird().fly();
-            }
+            }*/
 
             sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
             try {
