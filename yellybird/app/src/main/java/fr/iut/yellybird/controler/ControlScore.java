@@ -9,7 +9,7 @@ import fr.iut.yellybird.utils.Serializer;
 public class ControlScore {
     public static void save(Score score, Context context)
     {
-        score.init();
+        score.initScore();
         Serializer.serialize(context.getResources().getString(R.string.score),score,context);
     }
 
@@ -23,7 +23,7 @@ public class ControlScore {
             {
                 score = new Score();
             }
-            score.init();
+            score.initScore();
             return score;
         } catch (Exception e) {
             e.printStackTrace();

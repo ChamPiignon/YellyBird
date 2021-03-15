@@ -18,9 +18,9 @@ public class Score implements Serializable {
             bestScore=score;
     }
 
-    public void init()
+    public void initScore()
     {
-        int score=0;
+        score=0;
     }
 
     public int getScore() {
