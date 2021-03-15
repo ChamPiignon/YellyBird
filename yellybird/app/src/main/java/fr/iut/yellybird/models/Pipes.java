@@ -1,4 +1,4 @@
-package fr.iut.yellybird.components;
+package fr.iut.yellybird.models;
 
 public class Pipes {
 

@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Game;
+package fr.iut.yellybird.game;
 
 public class GameThread  extends Thread {
     static final long FPS = 60;

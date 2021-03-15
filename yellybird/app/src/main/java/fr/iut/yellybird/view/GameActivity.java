@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import fr.iut.yellybird.Game.GameView;
+import fr.iut.yellybird.game.GameView;
 
 public class GameActivity extends AppCompatActivity {
 

@@ -1,33 +1,20 @@
 package fr.iut.yellybird.view;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
-import android.os.Environment;
-import android.view.View;
 import android.widget.Button;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.UUID;
 
-import fr.iut.yellybird.Game.SoundMeter;
+import fr.iut.yellybird.BuildConfig;
 import fr.iut.yellybird.R;
 
 public class MenuActivity extends AppCompatActivity{

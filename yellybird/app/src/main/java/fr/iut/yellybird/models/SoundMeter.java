@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Game;
+package fr.iut.yellybird.models;
 
 import android.media.MediaRecorder;
 

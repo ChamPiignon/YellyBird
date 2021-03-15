@@ -1,8 +1,8 @@
-package fr.iut.yellybird.Sprite;
+package fr.iut.yellybird.sprite;
 
 import android.graphics.Canvas;
 
-import fr.iut.yellybird.Game.GameView;
+import fr.iut.yellybird.game.GameView;
 
 public class BirdSpriteAnimation extends SpriteAnimation{
     private int forceGravity;

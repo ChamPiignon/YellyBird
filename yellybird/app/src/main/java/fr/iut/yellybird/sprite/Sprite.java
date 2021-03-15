@@ -1,4 +1,4 @@
-package fr.iut.yellybird.Sprite;
+package fr.iut.yellybird.sprite;
 
 import android.graphics.Canvas;
 
