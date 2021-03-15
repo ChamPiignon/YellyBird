@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.service.controls.Control;
 import android.text.TextPaint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -15,23 +16,24 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.Random;
 
 import fr.iut.yellybird.R;
-import fr.iut.yellybird.models.SoundMeter;
+import fr.iut.yellybird.controler.ControlScore;
+import fr.iut.yellybird.models.Score;
 import fr.iut.yellybird.sprite.BackgroundSprite;
 import fr.iut.yellybird.sprite.BirdSpriteAnimation;
 import fr.iut.yellybird.sprite.FloorSprite;
 import fr.iut.yellybird.sprite.PipeSprite;
 
 public class GameView extends SurfaceView {
+    private  Context context;
     private SurfaceHolder holder;
     private GameThread gameThread;
     private BirdSpriteAnimation bird;
     private PipeSprite pipes;
     private FloorSprite floor;
     private BackgroundSprite bg;
-
     private VolumeThread volumeThread;
-
-    private int score=0;
+    private Score score;
+    private ControlScore controlScore;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
     public boolean gameOver = false;
@@ -40,6 +42,7 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
+        this.context = context;
 //        volumeThread = new VolumeThread(this);
         gameThread = new GameThread(this);
         holder = getHolder();
@@ -54,6 +57,7 @@ public class GameView extends SurfaceView {
             public void surfaceCreated(SurfaceHolder holder) {
                 initSprites();
                 setCollision();
+                score = ControlScore.load(context);
 //                volumeThread.setRunning(true);
 //                volumeThread.start();
                 gameThread.setRunning(true);
@@ -108,7 +112,7 @@ public class GameView extends SurfaceView {
     public void addPoint()
     {
         if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x)
-            score=score+1;
+            score.addPoint();
     }
 
     private void score()

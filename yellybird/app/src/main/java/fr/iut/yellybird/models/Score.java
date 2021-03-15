@@ -3,10 +3,15 @@ package fr.iut.yellybird.models;
 import java.io.Serializable;
 
 public class Score implements Serializable {
-    int score=0;
-    int bestScore=0;
+    private int score;
+    private int bestScore;
 
-    public void addpoint()
+    public Score() {
+        this.score = 0;
+        this.bestScore = 0;
+    }
+
+    public void addPoint()
     {
         score+=1;
         if(bestScore<=score)
@@ -18,4 +23,11 @@ public class Score implements Serializable {
         int score=0;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public int getBestScore() {
+        return bestScore;
+    }
 }

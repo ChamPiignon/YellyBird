@@ -1,6 +1,8 @@
-package fr.iut.yellybird.Game;
+package fr.iut.yellybird.game;
 
-import android.util.Log;
+
+import fr.iut.yellybird.game.GameView;
+import fr.iut.yellybird.models.SoundMeter;
 
 public class VolumeThread extends Thread{
     private GameView gameView;

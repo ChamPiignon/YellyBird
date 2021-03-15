@@ -2,6 +2,8 @@ package fr.iut.yellybird.game;
 
 import android.util.Log;
 
+import fr.iut.yellybird.models.SoundMeter;
+
 public class GameThread extends Thread {
     static final long FPS = 60;
     private GameView view;
