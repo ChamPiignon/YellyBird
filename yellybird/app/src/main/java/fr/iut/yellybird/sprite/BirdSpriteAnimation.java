@@ -24,10 +24,9 @@ public class BirdSpriteAnimation extends SpriteAnimation{
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        update();
     }
 
-    private void update() {
+    public void moveY() {
         if (y >= getContext().getHeight()- floorHeigh - getFrameHeight() - forceGravity) {
             forceGravity = 0;
             isOnTheFloor=true;

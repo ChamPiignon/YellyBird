@@ -22,9 +22,10 @@ import fr.iut.yellybird.sprite.BackgroundSprite;
 import fr.iut.yellybird.sprite.BirdSpriteAnimation;
 import fr.iut.yellybird.sprite.FloorSprite;
 import fr.iut.yellybird.sprite.PipeSprite;
+import fr.iut.yellybird.utils.Music;
 
 public class GameView extends SurfaceView {
-    private  Context context;
+    private Context context;
     private SurfaceHolder holder;
     private GameThread gameThread;
     private VolumeThread volumeThread;
@@ -96,12 +97,21 @@ public class GameView extends SurfaceView {
 
     public void move() {
         pipes.moveX();
+        bird.moveY();
+    }
+
+    public void flyBird(){
+        bird.fly();
+        Music.playFly(context);
     }
 
     public boolean isGameOver()
     {
         if(bird.isOnTheFloor||gameOver||pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())|| pipes.getWhereToDrawT().intersect(bird.getWhereToDraw()))
         {
+            if(!gameOver){
+                Music.playCrash(context);
+            }
             gameOver=true;
             return gameOver;
         }
@@ -113,6 +123,7 @@ public class GameView extends SurfaceView {
     {
         if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x) {
             score.addPoint();
+            Music.playScore(context);
             pipes.initPosition();
         }
     }
@@ -131,29 +142,6 @@ public class GameView extends SurfaceView {
         paint.setColor(Color.WHITE);
         canvas.drawText(" "+score.getScore(),width,height,paint);
     }
-
-
-    public BirdSpriteAnimation getBird() {
-        return bird;
-    }
-
-    //A supprimer
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (System.currentTimeMillis() - lastClick > 200) {
-            lastClick = System.currentTimeMillis();
-            synchronized (getHolder()) {
-                if(!gameOver)
-                {
-                    bird.fly();
-                }
-
-            }
-
-        }
-     return true;
-    }
-
 
 }
 

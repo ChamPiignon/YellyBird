@@ -5,7 +5,7 @@ import fr.iut.yellybird.game.GameView;
 import fr.iut.yellybird.models.SoundMeter;
 
 public class VolumeThread extends Thread{
-    static final long FPS = 60;
+    static final long FPS = 100;
     private GameView view;
     private SoundMeter micro;
     private boolean running = false;
@@ -29,11 +29,10 @@ public class VolumeThread extends Thread{
         long lastJump = 0;
         while (running) {
             startTime = System.currentTimeMillis();
-            if (!view.isGameOver() && System.currentTimeMillis() - lastJump > 25) {
+            if (!view.isGameOver() && System.currentTimeMillis() - lastJump > 50) {
                 if (  micro.getAmplitude() > 3000 ) {
-                    System.out.println("ENOUGH");
                     lastJump = System.currentTimeMillis();
-                    view.getBird().fly();
+                    view.flyBird();
                 }
             }
             sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
