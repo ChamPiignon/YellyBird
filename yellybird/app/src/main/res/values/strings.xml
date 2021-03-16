@@ -16,4 +16,7 @@
     <string name="_0">0</string>
     <string name="you_died_at">You died at :</string>
     <string name="record">Record :</string>
+
+    <!-- Strings serialization -->
+    <string name="score">score</string>
 </resources>

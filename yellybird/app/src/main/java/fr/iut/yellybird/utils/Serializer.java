@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public abstract class Serializer {
+public class Serializer {
     /**
      * Serialization of an object
      * @param filename
@@ -35,14 +35,14 @@ public abstract class Serializer {
 
     /**
      * Deserialization of an object
-     * @param filepath
+     * @param filename
      * @param context
      * @return
      */
-    public static Object deserialize(String filepath, Context context)
+    public static Object deserialize(String filename, Context context)
     {
             try {
-                FileInputStream stream = context.openFileInput(filepath);
+                FileInputStream stream = context.openFileInput(filename);
                 ObjectInputStream objectStream = new ObjectInputStream(stream);
                 Object object = objectStream.readObject();
                 objectStream.close();

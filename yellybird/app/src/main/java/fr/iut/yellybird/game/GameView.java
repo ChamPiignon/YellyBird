@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.service.controls.Control;
 import android.text.TextPaint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -15,23 +16,24 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.Random;
 
 import fr.iut.yellybird.R;
-import fr.iut.yellybird.models.SoundMeter;
+import fr.iut.yellybird.controler.ControlScore;
+import fr.iut.yellybird.models.Score;
 import fr.iut.yellybird.sprite.BackgroundSprite;
 import fr.iut.yellybird.sprite.BirdSpriteAnimation;
 import fr.iut.yellybird.sprite.FloorSprite;
 import fr.iut.yellybird.sprite.PipeSprite;
+import fr.iut.yellybird.utils.Music;
 
 public class GameView extends SurfaceView {
+    private Context context;
     private SurfaceHolder holder;
     private GameThread gameThread;
+    private VolumeThread volumeThread;
     private BirdSpriteAnimation bird;
     private PipeSprite pipes;
     private FloorSprite floor;
     private BackgroundSprite bg;
-
-    private VolumeThread volumeThread;
-
-    private int score=0;
+    private Score score;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
     public boolean gameOver = false;
@@ -40,24 +42,27 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
-//        volumeThread = new VolumeThread(this);
+        this.context = context;
         gameThread = new GameThread(this);
+        volumeThread = new VolumeThread(this);
         holder = getHolder();
         holder.addCallback(new Callback() {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-
+                ControlScore.save(score,context);
             }
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 initSprites();
                 setCollision();
-//                volumeThread.setRunning(true);
-//                volumeThread.start();
+                score = ControlScore.load(context);
+                ControlScore.save(score,context);
                 gameThread.setRunning(true);
                 gameThread.start();
+                volumeThread.setRunning(true);
+                volumeThread.start();
             }
 
             @Override
@@ -86,18 +91,27 @@ public class GameView extends SurfaceView {
         pipes.draw(canvas);
         bird.draw(canvas);
         floor.draw(canvas);
-        this.score();
+        this.drawScore();
         this.getHolder().unlockCanvasAndPost(canvas);
     }
 
     public void move() {
         pipes.moveX();
+        bird.moveY();
+    }
+
+    public void flyBird(){
+        bird.fly();
+        Music.playFly(context);
     }
 
     public boolean isGameOver()
     {
         if(bird.isOnTheFloor||gameOver||pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())|| pipes.getWhereToDrawT().intersect(bird.getWhereToDraw()))
         {
+            if(!gameOver){
+                Music.playCrash(context);
+            }
             gameOver=true;
             return gameOver;
         }
@@ -107,11 +121,14 @@ public class GameView extends SurfaceView {
 
     public void addPoint()
     {
-        if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x)
-            score=score+1;
+        if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x) {
+            score.addPoint();
+            Music.playScore(context);
+            pipes.initPosition();
+        }
     }
 
-    private void score()
+    private void drawScore()
     {
         int width = this.getWidth()/2;
         int height = this.getHeight()/11;
@@ -120,34 +137,11 @@ public class GameView extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(200f);
-        canvas.drawText(" "+score,width,height,paint);
+        canvas.drawText(" "+score.getScore(),width,height,paint);
         paint.setTypeface(ResourcesCompat.getFont(getContext(),R.font.yelly_fill_font));
         paint.setColor(Color.WHITE);
-        canvas.drawText(" "+score,width,height,paint);
+        canvas.drawText(" "+score.getScore(),width,height,paint);
     }
-
-
-    public BirdSpriteAnimation getBird() {
-        return bird;
-    }
-
-    //A supprimer
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (System.currentTimeMillis() - lastClick > 200) {
-            lastClick = System.currentTimeMillis();
-            synchronized (getHolder()) {
-                if(!gameOver)
-                {
-                    bird.fly();
-                }
-
-            }
-
-        }
-     return true;
-    }
-
 
 }
 
