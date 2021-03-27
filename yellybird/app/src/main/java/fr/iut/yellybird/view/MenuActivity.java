@@ -16,12 +16,14 @@ import java.util.UUID;
 
 import fr.iut.yellybird.BuildConfig;
 import fr.iut.yellybird.R;
+import fr.iut.yellybird.view.fragments.Skin;
 
 public class MenuActivity extends AppCompatActivity{
     private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int PERMISSION_REQUEST_CODE = 666;
 
     private Button restart;
+    private Button skins;
 
 
     private boolean checkPermission() {
@@ -60,6 +62,13 @@ public class MenuActivity extends AppCompatActivity{
         }
 
         this.restart = (Button) findViewById(R.id.btn_restart);
+        this.skins = (Button) findViewById(R.id.btn_skins);
+
+        skins.setOnClickListener(view -> {
+            Intent activity = new Intent(getApplicationContext(),SkinActivity.class);
+            startActivity(activity);
+            finish();
+        });
 
         restart.setOnClickListener(view -> {
             Intent activity = new Intent(getApplicationContext(),GameActivity.class);

@@ -19,4 +19,5 @@
 
     <!-- Strings serialization -->
     <string name="score">score</string>
+    <string name="basic_bird">Basic bird</string>
 </resources>

@@ -10,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YellyBird">
+        <activity android:name=".view.SkinActivity" android:theme="@style/Theme.YellyBird.NoActionBar">
+
+        </activity>
         <activity android:name=".view.GameActivity" android:theme="@style/Theme.YellyBird.NoActionBar">
 
         </activity>
