@@ -13,9 +13,17 @@ import java.util.List;
 import fr.iut.yellybird.R;
 import fr.iut.yellybird.view.fragments.Skin;
 
+/**
+ * The type Skin list adapter.
+ */
 public class SkinListAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private final List<Skin> skinList;
 
+    /**
+     * Instantiates a new Skin list adapter.
+     *
+     * @param skinList the skin list
+     */
     public SkinListAdapter(List<Skin> skinList){
         this.skinList = skinList;
     }

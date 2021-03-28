@@ -18,6 +18,9 @@ import fr.iut.yellybird.BuildConfig;
 import fr.iut.yellybird.R;
 import fr.iut.yellybird.view.fragments.Skin;
 
+/**
+ * The type Menu activity.
+ */
 public class MenuActivity extends AppCompatActivity{
     private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int PERMISSION_REQUEST_CODE = 666;

@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import fr.iut.yellybird.game.GameView;
 
+/**
+ * The type Game activity.
+ */
 public class GameActivity extends AppCompatActivity {
 
     private GameView gameView;

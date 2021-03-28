@@ -14,12 +14,18 @@ import fr.iut.yellybird.view.adapter.SkinListAdapter;
 import fr.iut.yellybird.view.fragments.DetailSkin;
 import fr.iut.yellybird.view.fragments.Skin;
 
+/**
+ * The type Skin activity.
+ */
 public class SkinActivity extends AppCompatActivity {
     private Skin selectedSkin;
     private RecyclerView listView;
     private SkinListAdapter adapter;
     private List<Skin> skins;
 
+    /**
+     * Instantiates a new Skin activity.
+     */
     public SkinActivity() {
     }
 
@@ -43,12 +49,22 @@ public class SkinActivity extends AppCompatActivity {
                 .commit();
     }
 
+    /**
+     * Sets current skin.
+     *
+     * @param currentSkin the current skin
+     */
     public void setCurrentSkin(Skin currentSkin) {
         if (currentSkin != selectedSkin) {
             selectedSkin = currentSkin;
         }
     }
 
+    /**
+     * Gets skins.
+     *
+     * @return the skins
+     */
     public List<Skin> getSkins() {
         return skins;
     }

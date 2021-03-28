@@ -10,6 +10,9 @@ import fr.iut.yellybird.R;
 import fr.iut.yellybird.view.SkinActivity;
 import fr.iut.yellybird.view.fragments.Skin;
 
+/**
+ * The type My view holder.
+ */
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
     private final ImageButton imageSkin;
