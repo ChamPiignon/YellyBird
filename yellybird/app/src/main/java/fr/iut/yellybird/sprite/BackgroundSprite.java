@@ -7,10 +7,19 @@ import android.view.SurfaceHolder;
 
 import fr.iut.yellybird.game.GameView;
 
+/**
+ * The type Background sprite.
+ */
 public class BackgroundSprite implements Sprite {
     private Bitmap sprite;
     private SurfaceHolder ourHolder;
 
+    /**
+     * Instantiates a new Background sprite.
+     *
+     * @param context     the context
+     * @param ressourceId the ressource id
+     */
     public BackgroundSprite(GameView context, int ressourceId) {
         ourHolder = context.getHolder();
         Bitmap background = BitmapFactory.decodeResource(context.getResources(), ressourceId);

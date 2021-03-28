@@ -11,9 +11,18 @@ import android.view.SurfaceHolder;
 import fr.iut.yellybird.game.GameView;
 
 
+/**
+ * The type Sprite animation.
+ */
 public class SpriteAnimation implements  Sprite{
         private final int FRAME_COUNT;
-        public float x = 0, y = 0;
+    /**
+     * The X.
+     */
+    public float x = 0, /**
+     * The Y.
+     */
+    y = 0;
         private SurfaceHolder ourHolder;
         private Bitmap sprite;
         private int frameWidth;
@@ -27,7 +36,17 @@ public class SpriteAnimation implements  Sprite{
         private Rect frameToDraw;
         private RectF whereToDraw;
 
-        public SpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height, int scale) {
+    /**
+     * Instantiates a new Sprite animation.
+     *
+     * @param context     the context
+     * @param ressourceId the ressource id
+     * @param nbFrame     the nb frame
+     * @param width       the width
+     * @param Height      the height
+     * @param scale       the scale
+     */
+    public SpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height, int scale) {
             this.context = context;
             ourHolder = context.getHolder();
             FRAME_COUNT = nbFrame;
@@ -39,12 +58,24 @@ public class SpriteAnimation implements  Sprite{
             sprite = Bitmap.createScaledBitmap(sprite, frameWidth * FRAME_COUNT, frameHeight, false);
         }
 
-        public SpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height) {
+    /**
+     * Instantiates a new Sprite animation.
+     *
+     * @param context     the context
+     * @param ressourceId the ressource id
+     * @param nbFrame     the nb frame
+     * @param width       the width
+     * @param Height      the height
+     */
+    public SpriteAnimation(GameView context, int ressourceId, int nbFrame, int width, int Height) {
             this(context,ressourceId,nbFrame,width,Height,1);
         }
 
 
-        public void manageCurrentFrame() {
+    /**
+     * Manage current frame.
+     */
+    public void manageCurrentFrame() {
             long time = System.currentTimeMillis();
             if (time > lastFrameChangeTime + frameLengthInMillisecond) {
                     lastFrameChangeTime = time;
@@ -67,22 +98,49 @@ public class SpriteAnimation implements  Sprite{
         }
      }
 
+    /**
+     * Is collide boolean.
+     *
+     * @param x2 the x 2
+     * @param y2 the y 2
+     * @return the boolean
+     */
     public boolean isCollide(float x2, float y2) {
         return x2 > x && x2 < x + frameWidth && y2 > y && y2 < y + frameHeight;
     }
 
+    /**
+     * Gets frame width.
+     *
+     * @return the frame width
+     */
     public int getFrameWidth() {
         return frameWidth;
     }
 
+    /**
+     * Gets frame height.
+     *
+     * @return the frame height
+     */
     public int getFrameHeight() {
         return frameHeight;
     }
 
+    /**
+     * Gets context.
+     *
+     * @return the context
+     */
     public GameView getContext() {
         return context;
     }
 
+    /**
+     * Gets where to draw.
+     *
+     * @return the where to draw
+     */
     public RectF getWhereToDraw() {
         return whereToDraw;
     }

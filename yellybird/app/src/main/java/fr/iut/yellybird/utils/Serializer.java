@@ -9,12 +9,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * The type Serializer.
+ */
 public class Serializer {
     /**
      * Serialization of an object
-     * @param filename
-     * @param object
-     * @param context
+     *
+     * @param filename the filename
+     * @param object   the object
+     * @param context  the context
      */
     public static void serialize(String filename, Object object, Context context)
     {
@@ -35,9 +39,10 @@ public class Serializer {
 
     /**
      * Deserialization of an object
-     * @param filename
-     * @param context
-     * @return
+     *
+     * @param filename the filename
+     * @param context  the context
+     * @return object
      */
     public static Object deserialize(String filename, Context context)
     {

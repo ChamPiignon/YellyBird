@@ -1,15 +1,34 @@
 package fr.iut.yellybird.game;
 import fr.iut.yellybird.game.GameView;
 import fr.iut.yellybird.models.SoundMeter;
+
+/**
+ * The type Volume thread.
+ */
 public class VolumeThread extends Thread{
+    /**
+     * The Fps.
+     */
     static final long FPS = 100;
     private GameView view;
     private SoundMeter micro;
     private boolean running = false;
+
+    /**
+     * Instantiates a new Volume thread.
+     *
+     * @param view the view
+     */
     public VolumeThread(GameView view){
         this.view = view;
         this.micro = new SoundMeter();
     }
+
+    /**
+     * Sets running.
+     *
+     * @param run the run
+     */
     public void setRunning(boolean run) {
         running = run;
         if(run) micro.start();

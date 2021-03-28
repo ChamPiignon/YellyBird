@@ -1,14 +1,33 @@
 package fr.iut.yellybird.game;
 import fr.iut.yellybird.models.SoundMeter;
+
+/**
+ * The type Game thread.
+ */
 public class GameThread extends Thread {
+    /**
+     * The Fps.
+     */
     static final long FPS = 100;
     private GameView view;
     private SoundMeter micro;
     private boolean running = false;
+
+    /**
+     * Instantiates a new Game thread.
+     *
+     * @param view the view
+     */
     public GameThread(GameView view) {
         this.view = view;
         this.micro = new SoundMeter();
     }
+
+    /**
+     * Sets running.
+     *
+     * @param run the run
+     */
     public void setRunning(boolean run) {
         running = run;
         if (run) micro.start();

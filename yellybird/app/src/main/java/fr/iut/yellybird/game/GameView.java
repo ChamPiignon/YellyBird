@@ -19,6 +19,10 @@ import fr.iut.yellybird.sprite.BirdSpriteAnimation;
 import fr.iut.yellybird.sprite.FloorSprite;
 import fr.iut.yellybird.sprite.PipeSprite;
 import fr.iut.yellybird.utils.Music;
+
+/**
+ * The type Game view.
+ */
 public class GameView extends SurfaceView {
     private Context context;
     private SurfaceHolder holder;
@@ -31,8 +35,17 @@ public class GameView extends SurfaceView {
     private Score score;
     private long lastClick=0;
     private int[] birdSprite={R.drawable.yellow, R.drawable.red , R.drawable.blue};
+    /**
+     * The Game over.
+     */
     public boolean gameOver = false;
     private Canvas canvas;
+
+    /**
+     * Instantiates a new Game view.
+     *
+     * @param context the context
+     */
     public GameView(Context context) {
         super(context);
         this.context = context;
@@ -70,6 +83,10 @@ public class GameView extends SurfaceView {
     {
         bird.setFloorHeight(floor.getFloor().getHeight());
     }
+
+    /**
+     * Draw.
+     */
     public void draw() {
         canvas = this.getHolder().lockCanvas();
         canvas.drawColor(Color.WHITE);
@@ -80,14 +97,28 @@ public class GameView extends SurfaceView {
         this.drawScore();
         this.getHolder().unlockCanvasAndPost(canvas);
     }
+
+    /**
+     * Move.
+     */
     public void move() {
         pipes.moveX();
         bird.moveY();
     }
+
+    /**
+     * Fly bird.
+     */
     public void flyBird(){
         bird.fly();
         Music.playFly(context);
     }
+
+    /**
+     * Is game over boolean.
+     *
+     * @return the boolean
+     */
     public boolean isGameOver()
     {
         if(bird.isOnTheFloor||gameOver||pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())|| pipes.getWhereToDrawT().intersect(bird.getWhereToDraw()))
@@ -100,6 +131,10 @@ public class GameView extends SurfaceView {
         }
         return false;
     }
+
+    /**
+     * Add point.
+     */
     public void addPoint()
     {
         if(!bird.isOnTheFloor&&!gameOver&&!pipes.getWhereToDrawB().intersect(bird.getWhereToDraw())&& !pipes.getWhereToDrawT().intersect(bird.getWhereToDraw())&&pipes.getWhereToDrawB().right<=bird.x) {
